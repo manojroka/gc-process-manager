@@ -35,7 +35,10 @@ struct msghdr msg, resp;  // famous struct msghdr, it includes "struct iovec *  
 struct iovec iov, iov2;
 int sock_fd;
 
-save_current_process_list(){
+int save_current_process_list(){
+
+	printf("calling to kernel for process list");
+
 	    //int socket(int domain, int type, int protocol);
     sock_fd = socket(PF_NETLINK, SOCK_RAW, NETLINK_USER); //NETLINK_KOBJECT_UEVENT  
 

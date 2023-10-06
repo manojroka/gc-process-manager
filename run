@@ -1,2 +1,7 @@
 #!/bin/sh
 
+sshpass -p 'manoj' scp -r ~/Documents/Projects/lps/source/*.c manoj@192.168.10.75:~/source/
+
+sshpass -p 'manoj' ssh manoj@192.168.10.75 'cd ~/source && make && make client && echo manoj | sudo rmmod mod_lps.ko && echo manoj | sudo insmod mod_lps.ko'
+
+sshpass -p 'manoj' ssh manoj@192.168.10.75 'cd ~/source && ./lps'

@@ -42,7 +42,7 @@ static void LPS_recv_msg(struct sk_buff *skb)
     char *msg = "Hello msg from kernel";
 
     int process_count = 0;
-    PROCESS *process_list = kmalloc(sizeof(PROCESS) * process_count, GFP_KERNEL);
+    PROCESS *process_list = kzalloc(sizeof(PROCESS) * process_count, GFP_KERNEL);
 
     for_each_process( task ){           /*    for_each_process() MACRO for iterating through each task in the os located in linux\sched\signal.h    */
         // printk(KERN_INFO "\nPARENT PID: %d PROCESS: %s STATE: %ld",task->pid, task->comm, task->state);/*    log parent id/executable name/state    */
