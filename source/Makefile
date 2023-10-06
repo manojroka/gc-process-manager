@@ -1,4 +1,4 @@
-obj-m += netlink_kernel.o
+obj-m += mod_lps.o
 
 #generate the path
 CURRENT_PATH:=$(shell pwd)
@@ -18,13 +18,13 @@ LINUX_KERNEL_PATH:=/usr/src/linux-headers-$(LINUX_KERNEL)
 #   and compile them to generate ko files
 
 all:
-    @echo $(LINUX_KERNEL_PATH)
-    make -C $(LINUX_KERNEL_PATH) M=$(CURRENT_PATH) modules
+        @echo $(LINUX_KERNEL_PATH)
+        make -C $(LINUX_KERNEL_PATH) M=$(CURRENT_PATH) modules
 
 client:
-    gcc netlink_client.c -o netlink_client -g
+        gcc lps.c -o lps -g
 
 #clean
 clean:
-    make -C $(LINUX_KERNEL_PATH) M=$(CURRENT_PATH) clean
-    rm netlink_client
+        make -C $(LINUX_KERNEL_PATH) M=$(CURRENT_PATH) clean
+        rm lps
