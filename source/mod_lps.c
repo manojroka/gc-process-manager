@@ -8,7 +8,7 @@
 #include <linux/skbuff.h>
 #include <linux/slab.h>
 
-#define MY_NETLINK 1 // cannot be larger than 31, otherwise we shall get "insmod: ERROR: could not insert module netlink_kernel.ko: No child processes"
+#define MY_NETLINK 30 // cannot be larger than 31, otherwise we shall get "insmod: ERROR: could not insert module netlink_kernel.ko: No child processes"
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Manoj");
@@ -41,28 +41,7 @@ static void LPS_recv_msg(struct sk_buff *skb)
     int pid, res, msg_size;
     char *msg = "Hello msg from kernel";
 
-    int process_count = 0;
-    PROCESS *process_list = kzalloc(sizeof(PROCESS) * process_count, GFP_KERNEL);
 
-    for_each_process( task ){           /*    for_each_process() MACRO for iterating through each task in the os located in linux\sched\signal.h    */
-        // printk(KERN_INFO "\nPARENT PID: %d PROCESS: %s STATE: %ld",task->pid, task->comm, task->state);/*    log parent id/executable name/state    */
-        
-        
-        process_list = krealloc(process_list, sizeof(PROCESS) * process_count, GFP_KERNEL);
-        process_list[process_count].pid = task->pid;
-        process_list[process_count].process = task->comm;
-        process_list[process_count].state = task->state;
-
-        list_for_each(list, &task->children){                       /*    list_for_each MACRO to iterate through task->children    */
-            int child_process_counter = 0;
-            task_child = list_entry( list, struct task_struct, sibling );    /*    using list_entry to declare all vars in task_child struct    */
-     
-            printk(KERN_INFO "\nCHILD OF %s[%d] PID: %d PROCESS: %s STATE: %ld",task->comm, task->pid, /*    log child of and child pid/name/state    */
-                task_child->pid, task_child->comm, task_child->state);
-            child_process_counter++;
-        }
-        process_count++;
-    }
 
 
     printk(KERN_INFO "Entering: %s\n", __FUNCTION__);
@@ -97,7 +76,6 @@ static void LPS_recv_msg(struct sk_buff *skb)
     if(res < 0)
         printk(KERN_INFO "Error while sending back to user\n");
 
-    kfree(process_list);
 }
 
 static int __init hello_init(void)
@@ -113,8 +91,8 @@ static int __init hello_init(void)
     printk("Entering: %s, protocol family = %d \n",__FUNCTION__, MY_NETLINK);
     if(!nl_sk)
     {
-        //printk(KERN_ALERT "Error creating socket.\n");
-        //return -10;
+        printk(KERN_ALERT "Error creating socket.\n");
+        return -10;
     }
 
     printk("MyNetLink Init OK!\n");

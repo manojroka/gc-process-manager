@@ -23,6 +23,7 @@ static int running = 0;
 static int delay = 1;
 static int counter = 0;
 static char *conf_file_name = NULL;
+
 static char *pid_file_name = NULL;
 static int pid_fd = -1;
 static char *app_name = NULL;
@@ -37,13 +38,13 @@ int sock_fd;
 
 int save_current_process_list(){
 
-	printf("calling to kernel for process list");
-
-	    //int socket(int domain, int type, int protocol);
+	//int socket(int domain, int type, int protocol);
     sock_fd = socket(PF_NETLINK, SOCK_RAW, NETLINK_USER); //NETLINK_KOBJECT_UEVENT  
 
-    if(sock_fd < 0)
+    if(sock_fd < 0){
+    	printf("could not create socket\n");
         return -1;
+    }
 
     memset(&src_addr, 0, sizeof(src_addr));
     src_addr.nl_family = AF_NETLINK;
@@ -52,9 +53,12 @@ int save_current_process_list(){
     //int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
     if(bind(sock_fd, (struct sockaddr*)&src_addr, sizeof(src_addr))){
         perror("bind() error\n");
+        printf("bind() error\n");
         close(sock_fd);
         return -1;
     }
+
+    printf("good until here\n");
 
     memset(&dest_addr, 0, sizeof(dest_addr));
     dest_addr.nl_family = AF_NETLINK;
