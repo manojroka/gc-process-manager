@@ -58,8 +58,6 @@ int save_current_process_list(){
         return -1;
     }
 
-    printf("good until here\n");
-
     memset(&dest_addr, 0, sizeof(dest_addr));
     dest_addr.nl_family = AF_NETLINK;
     dest_addr.nl_pid = 0;       /* For Linux Kernel */
@@ -79,7 +77,7 @@ int save_current_process_list(){
     nlh2->nlmsg_pid = getpid();  //self pid
     nlh2->nlmsg_flags = 0; 
 
-    strcpy(NLMSG_DATA(nlh), "Hello this is a msg from userspace");   //put "Hello" msg into nlh
+    strcpy(NLMSG_DATA(nlh), "get_process_list");   //put "Hello" msg into nlh
 
     iov.iov_base = (void *)nlh;         //iov -> nlh
     iov.iov_len = nlh->nlmsg_len;
@@ -95,41 +93,16 @@ int save_current_process_list(){
     resp.msg_iov = &iov2;                 //resp -> iov
     resp.msg_iovlen = 1;
 
+    printf("asking kernel for process list\n");
 
-
-    printf("Sending message to kernel\n");
-
-    int ret = sendmsg(sock_fd, &msg, 0);   
-    printf("send ret: %d\n", ret); 
-
-    printf("Waiting for message from kernel\n");
+    int ret = sendmsg(sock_fd, &msg, 0);
 
     /* Read message from kernel */
     recvmsg(sock_fd, &resp, 0);  //msg is also receiver for read
 
-    printf("Received message payload: %s\n", (char *) NLMSG_DATA(nlh2));  
-
-    char usermsg[MAX_PAYLOAD];
-    while (1) {
-	    printf("Input your msg for sending to kernel: ");
-	        scanf("%s", usermsg);
-
-	        strcpy(NLMSG_DATA(nlh), usermsg);   //put "Hello" msg into nlh
-
-
-	        printf("Sending message \" %s \" to kernel\n", usermsg);
-
-	        ret = sendmsg(sock_fd, &msg, 0);   
-	        printf("send ret: %d\n", ret); 
-
-	        printf("Waiting for message from kernel\n");
-
-	        /* Read message from kernel */
-	    recvmsg(sock_fd, &resp, 0);  //msg is also receiver for read
-
-	    printf("Received message payload: %s\n", (char *)NLMSG_DATA(nlh2));   
-
-	}
+    //printf("Received message payload: %s\n", (char *) NLMSG_DATA(nlh2));  
+    //char process_list_from_kernel = (char *) NLMSG_DATA(nlh2);
+    printf("Process list: \n %s", (char *) NLMSG_DATA(nlh2));
 
 	return 0;
 }
