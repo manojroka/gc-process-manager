@@ -1,7 +1,11 @@
 #!/bin/sh
 
-sshpass -p 'manoj' scp -r ~/Documents/Projects/lps/source/*.c manoj@192.168.10.75:~/source/
+ip="192.168.11.68"
 
-sshpass -p 'manoj' ssh manoj@192.168.10.75 'cd ~/source && make && make client && echo manoj | sudo rmmod mod_lps.ko && echo manoj | sudo insmod mod_lps.ko'
+sshpass -p 'manoj' scp -r ~/Documents/Projects/lps/source/*.c manoj@"$ip":~/source/
 
-sshpass -p 'manoj' ssh manoj@192.168.10.75 'cd ~/source && ./lps'
+sshpass -p 'manoj' ssh manoj@"$ip" 'cd ~/source && make && make client && echo manoj | sudo rmmod mod_lps.ko'
+
+sshpass -p 'manoj' ssh manoj@"$ip" 'cd ~/source && echo manoj | sudo insmod mod_lps.ko'
+
+#sshpass -p 'manoj' ssh manoj@192.168.10.75 'cd ~/source && ./lps'

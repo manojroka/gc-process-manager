@@ -23,6 +23,7 @@ static int running = 0;
 static int delay = 1;
 static int counter = 0;
 static char *conf_file_name = NULL;
+
 static char *pid_file_name = NULL;
 static int pid_fd = -1;
 static char *app_name = NULL;
@@ -37,13 +38,13 @@ int sock_fd;
 
 int save_current_process_list(){
 
-	printf("calling to kernel for process list");
-
-	    //int socket(int domain, int type, int protocol);
+	//int socket(int domain, int type, int protocol);
     sock_fd = socket(PF_NETLINK, SOCK_RAW, NETLINK_USER); //NETLINK_KOBJECT_UEVENT  
 
-    if(sock_fd < 0)
+    if(sock_fd < 0){
+    	printf("could not create socket\n");
         return -1;
+    }
 
     memset(&src_addr, 0, sizeof(src_addr));
     src_addr.nl_family = AF_NETLINK;
@@ -52,6 +53,7 @@ int save_current_process_list(){
     //int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
     if(bind(sock_fd, (struct sockaddr*)&src_addr, sizeof(src_addr))){
         perror("bind() error\n");
+        printf("bind() error\n");
         close(sock_fd);
         return -1;
     }
@@ -75,7 +77,7 @@ int save_current_process_list(){
     nlh2->nlmsg_pid = getpid();  //self pid
     nlh2->nlmsg_flags = 0; 
 
-    strcpy(NLMSG_DATA(nlh), "Hello this is a msg from userspace");   //put "Hello" msg into nlh
+    strcpy(NLMSG_DATA(nlh), "get_process_list");   //put "Hello" msg into nlh
 
     iov.iov_base = (void *)nlh;         //iov -> nlh
     iov.iov_len = nlh->nlmsg_len;
@@ -91,41 +93,16 @@ int save_current_process_list(){
     resp.msg_iov = &iov2;                 //resp -> iov
     resp.msg_iovlen = 1;
 
+    printf("asking kernel for process list\n");
 
-
-    printf("Sending message to kernel\n");
-
-    int ret = sendmsg(sock_fd, &msg, 0);   
-    printf("send ret: %d\n", ret); 
-
-    printf("Waiting for message from kernel\n");
+    int ret = sendmsg(sock_fd, &msg, 0);
 
     /* Read message from kernel */
     recvmsg(sock_fd, &resp, 0);  //msg is also receiver for read
 
-    printf("Received message payload: %s\n", (char *) NLMSG_DATA(nlh2));  
-
-    char usermsg[MAX_PAYLOAD];
-    while (1) {
-	    printf("Input your msg for sending to kernel: ");
-	        scanf("%s", usermsg);
-
-	        strcpy(NLMSG_DATA(nlh), usermsg);   //put "Hello" msg into nlh
-
-
-	        printf("Sending message \" %s \" to kernel\n", usermsg);
-
-	        ret = sendmsg(sock_fd, &msg, 0);   
-	        printf("send ret: %d\n", ret); 
-
-	        printf("Waiting for message from kernel\n");
-
-	        /* Read message from kernel */
-	    recvmsg(sock_fd, &resp, 0);  //msg is also receiver for read
-
-	    printf("Received message payload: %s\n", (char *)NLMSG_DATA(nlh2));   
-
-	}
+    //printf("Received message payload: %s\n", (char *) NLMSG_DATA(nlh2));  
+    //char process_list_from_kernel = (char *) NLMSG_DATA(nlh2);
+    printf("Process list: \n %s", (char *) NLMSG_DATA(nlh2));
 
 	return 0;
 }
