@@ -25,11 +25,6 @@ import ProfileButton from "@/components/ProfileButton.vue";
   //top:10px; */
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 .topnav {
   overflow: hidden;
 /* //background-color: #e3eae8; */
@@ -50,12 +45,10 @@ body {
 }
 
 .topnav a {
-
-
   float: left;
   color: black;
   text-align: center;
-  padding: 14px 16px;
+  //padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -68,5 +61,21 @@ body {
 .topnav a.active {
   background-color: #04AA6D;
   color: white;
+}
+
+@media screen and (max-width: 800px) {
+  .topnav {
+    //min-width: 5px;
+  }
+
+  navbar {
+    flex-direction: row;
+    display: flex;
+    width: 50px;
+  }
+
+  .topnav a{
+    padding: 5px;
+  }
 }
 </style>

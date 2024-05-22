@@ -12,6 +12,7 @@ import Main from './components/Main.vue'
 
 <style scoped>
 
+
 body {
   background: #f1f5f9;
 }

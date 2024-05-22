@@ -24,8 +24,8 @@
 
       <tr>
         <td>2024-05-17 14:22:23</td>
-        <td>Critical</td>
-        <td>Detected Suspicious Ownership Transfer</td>
+        <td>High</td>
+        <td>Detected Suspicious Process Listening on Usual Port</td>
         <td>
           <p class="action">Fix it</p>
           <p class="action">Ignore</p>
@@ -35,8 +35,8 @@
 
       <tr>
         <td>2024-05-17 14:22:23</td>
-        <td>Critical</td>
-        <td>Detected Suspicious Ownership Transfer</td>
+        <td>Low</td>
+        <td>New Protocol Detected</td>
         <td>
           <p class="action">Fix it</p>
           <p class="action">Ignore</p>
@@ -46,8 +46,8 @@
 
       <tr>
         <td>2024-05-17 14:22:23</td>
-        <td>Critical</td>
-        <td>Detected Suspicious Ownership Transfer</td>
+        <td>High</td>
+        <td>New User Added</td>
         <td>
           <p class="action">Fix it</p>
           <p class="action">Ignore</p>
@@ -61,14 +61,14 @@
 
 <style scoped>
 .content-part{
-  margin: 50px;
-  width: 100px;
+  padding: 30px;
+  width: 100%;
 }
 
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  min-width: 800px;
+  min-width: auto;
 }
 
 #customers th {

@@ -11,9 +11,22 @@ import Navbar from "@/components/Navbar.vue";
 
 <style scoped>
 .main-part {
-  width: 1000px;
+  width: 900px;
   display: flex;
   flex-direction: column;
   flex: 1 1;
 }
+
+@media screen and (max-width: 1260px) {
+  .main-part {
+    width: 800px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .main-part {
+    //width: 900px;
+  }
+}
+
 </style>

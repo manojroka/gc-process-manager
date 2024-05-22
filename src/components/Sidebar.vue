@@ -26,22 +26,7 @@
         <p class="button border-top border-bottom">
           <span class="text"><RouterLink to="/automation">Automation</RouterLink></span>
         </p>
-  
-<!--        <p class="button border-top">-->
-<!--          <span class="text">Users Management</span>-->
-<!--        </p>-->
-<!--  -->
-<!--        <p class="button border-top">-->
-<!--          <span class="text">Process Management</span>-->
-<!--        </p>-->
-<!--  -->
-<!--        <p class="button border-top">-->
-<!--          <span class="text">Reports Management</span>-->
-<!--        </p>-->
-<!--  -->
-<!--        <p class="button border-top border-bottom">-->
-<!--          <span class="text">Automation</span>-->
-<!--        </p>-->
+
       </div>
     </aside>
   </template>
@@ -62,13 +47,13 @@
   }
   
   aside {
-    /* //width: 20%; */
+    width: 280px;
     text-align: center;
   
     background-color: white;
     color: black;
   
-    width: calc(15rem + 100px);
+    //width: calc(15rem + 100px);
     overflow: hidden;
     min-height: 100vh;
     padding: 1rem;
@@ -100,6 +85,17 @@
     cursor: pointer;
     transition: 0.2s ease-in-out;
     padding: 1.0rem 0.6rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    aside {
+      width: 200px;
+    }
+
+    aside .menu .button {
+      font-size: 10px;
+      padding: 5px;
+    }
   }
   </style>
   
