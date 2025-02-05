@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ServerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,6 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::view('servers', 'servers.index')
-    ->middleware(['auth', 'verified'])
-    ->name('servers');
+Route::resource('servers', ServerController::class);
 
 require __DIR__.'/auth.php';

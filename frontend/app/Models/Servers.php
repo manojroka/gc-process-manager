@@ -12,7 +12,9 @@ class Servers extends Model
     protected $fillable = [
         'host_name',
         'username',
-        'password',
         'server_port'
+        'access_method'
+        'password',
+        'ssh_public_key',
     ];
 }

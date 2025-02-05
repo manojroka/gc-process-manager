@@ -35,7 +35,7 @@ new class extends Component
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('servers')" :active="request()->routeIs('servers')" wire:navigate>
+                    <x-nav-link :href="route('servers.index')" :active="request()->routeIs('servers.index')" wire:navigate>
                         {{ __('Servers') }}
                     </x-nav-link>
                 </div>
