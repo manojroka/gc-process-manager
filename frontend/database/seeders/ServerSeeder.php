@@ -12,11 +12,11 @@ class ServerSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('servers')->insert([
-            'host_name' => Str::random(10),
-            'username' => Str::random(5),
-            'password' => Hash::make('password'),
-            'server_port' => Int::random(4),
-        ]);
+        // DB::table('servers')->insert([
+        //     'host_name' => Str::random(10),
+        //     'username' => Str::random(5),
+        //     'password' => Hash::make('password'),
+        //     'server_port' => Int::random(4),
+        // ]);
     }
 }
