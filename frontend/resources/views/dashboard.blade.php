@@ -38,7 +38,7 @@
                             </tr>
                             <tr>
                                 <th class="border border-gray-300 p-2 text-left" colspan="12" style="background-color: white;">
-                                    MiB Swap
+                                    MiB Swap:
                                 </th>
                             </tr>
 
