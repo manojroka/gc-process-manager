@@ -10,10 +10,10 @@ class Servers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'host_name',
-        'username',
-        'server_port'
-        'access_method'
+        "host_name",
+        "username",
+        "server_port",
+        "access_method",
         'password',
         'ssh_public_key',
     ];
