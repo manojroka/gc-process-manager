@@ -12,7 +12,6 @@ then
 fi
 
 php artisan migrate
-php artisan db:seed
 #todo: check if key is already generated
 #php artisan key:generate
 npm run dev &
