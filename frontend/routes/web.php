@@ -24,6 +24,8 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-Route::resource('servers', ServerController::class);
+Route::group(['middleware' => 'auth'], function() {
+  Route::resource('servers', ServerController::class);
+});
 
 require __DIR__.'/auth.php';
