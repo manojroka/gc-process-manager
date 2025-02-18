@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('host_name');
             $table->string('username');
-            $table->string('password');
             $table->string('server_port');
+            $table->string('access_method');
+            $table->string('password');
+            $table->string('ssh_public_key');
             $table->timestamps();
         });
     }

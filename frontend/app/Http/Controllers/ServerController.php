@@ -31,7 +31,7 @@ class ServerController extends Controller
     {
         $fields = [
             'host_name' => 'required|active_url',
-            'username' => 'required|min:6|alpha_dash',
+            'username' => 'required|min:3|alpha_dash',
             'server_port' => 'required|numeric|max:65535|min:1',
             'access_method' => 'required|in:PASSWORD,SSH_KEY_BASED',
         ];
