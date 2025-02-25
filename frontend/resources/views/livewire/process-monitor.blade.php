@@ -1,4 +1,4 @@
-<div wire:poll.10s="updateProcessData">
+<div wire:poll.20s="updateProcessData">
     <h2 class="text-xl font-semibold">Process Monitor</h2>
 
     @if(isset($processData) && !empty($processData))
