@@ -9,7 +9,7 @@ class ProcessMonitor extends Component
 {
     public $processData = "Fetching process data..."; 
 
-    // Method to fetch process data
+    // fetch process data
     public function updateProcessData()
     {
         $this->processData = shell_exec('ps -ef'); 
