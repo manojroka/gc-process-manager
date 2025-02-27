@@ -20,12 +20,18 @@ Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+
+Route::get('/test-env', function() {
+      return env('REVERB_APP_ID');
+  });
+  
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
 Route::group(['middleware' => 'auth'], function() {
   Route::resource('servers', ServerController::class);
+
 });
 
 require __DIR__.'/auth.php';
