@@ -32,17 +32,16 @@ return [
 
         'reverb' => [
             'driver' => 'pusher', // Laravel uses 'pusher' driver for Reverb
-            'key' => env('REVERB_APP_KEY'),  // Your Reverb app key
-            'secret' => env('REVERB_APP_SECRET'),  // Your Reverb app secret
-            'app_id' => env('REVERB_APP_ID'),  // Your Reverb app ID
+            'key' => env('REVERB_APP_KEY'),  
+            'secret' => env('REVERB_APP_SECRET'),  
+            'app_id' => env('REVERB_APP_ID'),  
             'options' => [
                 'host' => env('REVERB_HOST'),  
                 'port' => env('REVERB_PORT'),  
                 'scheme' => env('REVERB_SCHEME', 'https'),  
-                'useTLS' => env('REVERB_SCHEME', 'https') === 'https',  // Force TLS if 'https'
+                'useTLS' => env('REVERB_SCHEME', 'https') === 'https',  
             ],
             'client_options' => [
-                // Add any client-specific options here if needed
             ],
         ],
 

@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServerController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +18,7 @@ Route::view('/', 'welcome');
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
 
 
 Route::get('/test-env', function() {
