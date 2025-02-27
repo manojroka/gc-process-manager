@@ -1,5 +1,5 @@
 import Echo from 'laravel-echo';
-import Reverb from 'reverb-js';
+// import Reverb from 'reverb-js';
 
 window.Reverb = Reverb;
 
