@@ -1,8 +1,4 @@
 <div>
-    <!-- Button to refresh data manually -->
-    <button wire:click="updateProcessData" class="bg-blue-500 text-white p-2 rounded mb-4">Refresh Data</button>
-
-    <!-- Table structure to display process data -->
     <table class="min-w-full table-auto">
         <thead>
             <tr class="bg-gray-200">

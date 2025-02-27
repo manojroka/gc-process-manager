@@ -12,7 +12,8 @@ class ProcessMonitor extends Component
     public function updateProcessData()
 {
     // Fetch the output of the command
-    $rawData = shell_exec('ps aux'); 
+    $rawData = shell_exec('ps -aux --sort=-%mem'); 
+
 
     // Log raw data to check the full output
     Log::debug('Raw process data:', ['data' => $rawData]);
@@ -27,12 +28,11 @@ class ProcessMonitor extends Component
     $this->processData = [];
 
     foreach ($lines as $line) {
-        // Split by multiple spaces and trim extra spaces
         $row = preg_split('/\s+/', trim($line));  
 
         // Check if the number of columns in row matches headers count
         if (count($row) === count($headers)) {  
-            $this->processData[] = array_combine($headers, $row);  // Combine headers with values
+            $this->processData[] = array_combine($headers, $row);  
         } else {
             // Handle the case where rows don't match headers, if necessary (e.g., skip this row)
             Log::warning('Skipping row due to mismatch: ' . implode(' ', $row));
