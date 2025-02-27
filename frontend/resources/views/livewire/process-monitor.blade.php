@@ -1,12 +1,24 @@
 <div>
-    <!-- <h2>Process Monitor</h2> -->
-    <pre id="process-data">{{ $processData }}</pre>
+    <!-- Button to refresh data manually -->
+    <button wire:click="updateProcessData" class="bg-blue-500 text-white p-2 rounded mb-4">Refresh Data</button>
 
-    <script>
-        window.Echo.channel('process-data')
-            .listen('.ProcessDataUpdated', (event) => {
-                console.log("New process data received:", event.processData);
-                document.getElementById("process-data").innerText = event.processData;
-            });
-    </script>
+    <!-- Table structure to display process data -->
+    <table class="min-w-full table-auto">
+        <thead>
+            <tr class="bg-gray-200">
+                @foreach (array_keys($processData[0] ?? []) as $header)
+                    <th class="px-4 py-2 text-left">{{ ucwords(str_replace('_', ' ', $header)) }}</th>
+                @endforeach
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($processData as $process)
+                <tr class="border-t">
+                    @foreach ($process as $value)
+                        <td class="px-4 py-2">{{ $value }}</td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
