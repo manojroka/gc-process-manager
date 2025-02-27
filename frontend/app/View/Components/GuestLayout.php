@@ -15,3 +15,5 @@ class GuestLayout extends Component
         return view('layouts.guest');
     }
 }
+
+
