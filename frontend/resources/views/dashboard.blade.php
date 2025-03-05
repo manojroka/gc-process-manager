@@ -1,8 +1,14 @@
 <x-app-layout>
-    <div class="container">
-        <h1 class="text-3xl font-bold">Detailed process info (user, CPU, memory usage, etc.)</h1>
-        <div class="mt-8">
-            @livewire('process-monitor')  
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <h1 class="text-2xl font-bold mb-4">Display Process Details</h1>
+
+                @livewireStyles
+                @livewireScripts
+
+                @livewire('process-monitor')
+            </div>
         </div>
     </div>
 </x-app-layout>
